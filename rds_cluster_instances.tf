@@ -5,7 +5,6 @@ resource "aws_rds_cluster_instance" "writer" {
   instance_class     = "db.r4.large"
   engine             = aws_rds_cluster.default.engine
   engine_version     = aws_rds_cluster.default.engine_version
-  promotion_tier     = 0
 }
 
 resource "aws_rds_cluster_instance" "reader" {
@@ -15,5 +14,5 @@ resource "aws_rds_cluster_instance" "reader" {
   instance_class     = "db.r4.large"
   engine             = aws_rds_cluster.default.engine
   engine_version     = aws_rds_cluster.default.engine_version
-  promotion_tier     = 15 // TODO - not sure what this should be yet
+  promotion_tier     = 1
 }

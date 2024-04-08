@@ -8,10 +8,11 @@ resource "aws_security_group" "aurora_sg" {
     from_port   = 5432
     to_port     = 5432
     protocol    = "tcp"
-    //TODO add cidr_blocks here
+    cidr_blocks = []
   }
 
   egress {
+    description = "Allow all outbound traffic"
     from_port   = 0
     to_port     = 0
     protocol    = "-1"
