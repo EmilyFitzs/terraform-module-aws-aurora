@@ -25,13 +25,29 @@ This module orchestrates the creation of:
    Begin by cloning the repository to your local environment to get started with the module.
 
 2. **Variable Configuration**:
-   Within the `variables.tf` file, update the variables to align with your specific AWS environment settings. The key variables include:
+     These variables serve as placeholders for your actual environment-specific values. The key variables include:
     - `vpc_id`: Identifier for the VPC intended for the DB cluster deployment.
     - `subnet_ids`: Collection of subnet IDs designated for the DB instances.
     - `vpc_security_group_ids`: List of security group IDs within the VPC to be associated with the RDS cluster.
     - `cluster_identifier`: Unique identifier for the RDS cluster.
     - `access_key` and `secret_key`: Credentials for AWS provider authentication.
     - `target_bucket_name`: Name assigned to the S3 bucket used as the migration target.
+
+For setting the values for the declared variables, create a file named `terraform.tfvars` at the root of your Terraform project directory. This file is automatically loaded by Terraform during operations, but make sure it's included in your `.gitignore` to prevent sensitive data from being committed.
+
+In your `terraform.tfvars` file, assign values to each of the variables you declared in `variables.tf`. For example:
+
+   ```hcl
+   vpc_id                 = "vpc-123abcd"
+   subnet_ids             = ["subnet-abc123", "subnet-def456"]
+   vpc_security_group_ids = ["sg-789xyz"]
+   cluster_identifier     = "my-cluster-id"
+   access_key             = "AKIAIOSFODNN7EXAMPLE"
+   secret_key             = "wJalrXUtnFEMI/K7MDENG/bPxRfiCYEXAMPLEKEY"
+   target_bucket_name     = "my-dms-target-bucket"
+```  
+
+Note: Ensure sensitive information like access_key and secret_key is managed securely, preferably using a secrets manager or environment variables, rather than hardcoding them.
 
 3. **Terraform Initialization**:
    With Terraform installed, initialize your workspace by running the following command:
