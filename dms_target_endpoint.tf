@@ -1,12 +1,12 @@
 resource "aws_dms_endpoint" "target" {
-  endpoint_id     = "${var.cluster_identifier}-target-endpoint"
-  endpoint_type   = "target"
-  engine_name     = "s3"
-  server_name     = var.target_bucket_name
+  endpoint_id   = "${var.cluster_identifier}-target-endpoint"
+  endpoint_type = "target"
+  engine_name   = "s3"
+  server_name   = var.target_bucket_name
 
   s3_settings {
-    bucket_name               = var.target_bucket_name
-    service_access_role_arn   = aws_iam_role.dms_access_role.arn
+    bucket_name             = var.target_bucket_name
+    service_access_role_arn = aws_iam_role.dms_access_role.arn
   }
 
   tags = {
@@ -32,8 +32,8 @@ resource "aws_iam_role" "dms_access_role" {
 }
 
 resource "aws_iam_role_policy" "dms_s3_access" {
-  name   = "${var.cluster_identifier}-dms-s3-access-policy"
-  role   = aws_iam_role.dms_access_role.id
+  name = "${var.cluster_identifier}-dms-s3-access-policy"
+  role = aws_iam_role.dms_access_role.id
 
   policy = jsonencode({
     Version = "2012-10-17",
